@@ -1,3 +1,7 @@
+const inquirer = require('inquirer');
+const fs = require('fs');
+//const markdown = require 
+
 const questions = [
     {
         type: 'input',
@@ -35,7 +39,31 @@ const questions = [
         message: 'Chose your license type.',
         choices: ['BSD', 'MIT', 'GPL', 'None'],
     },
+    {
+        type: 'input',
+        name: 'GitHub',
+        message: 'Provide your GitHub username.'
+    },
+    {
+        tpye: 'input',
+        name: 'email',
+        message: 'Provide your email.'
+    },
 
    
   ];
   
+// Function to write README file using the user input
+function writeToFile(fileName, data) {
+    return fs.writeFileSync(path.join(process.cwd(), fileName), data);
+  }
+  
+  // Function to initialize app
+  function init() {
+    inquirer.prompt(questions).then((inquirerResponses) => {
+      console.log('Generating README...');
+      writeToFile('README.md', generateMarkdown({ ...inquirerResponses }));
+    });
+  }
+  
+  init();
