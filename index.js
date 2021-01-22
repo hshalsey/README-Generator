@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-//const markdown = require 
+const generateMarkdown = require ('./utils/generateMarkdown');
+const path = require('path');
 
 const questions = [
     {
@@ -11,7 +12,7 @@ const questions = [
     {
         type: 'input',
         name:'description',
-        message:'Provide the discription of your project.',
+        message:'Provide a description of your project.',
     },
     {
         type: 'input',
@@ -42,7 +43,7 @@ const questions = [
     {
         type: 'input',
         name: 'GitHub',
-        message: 'Provide your GitHub username.'
+        message: 'Provide your GitHub username.',
     },
     {
         tpye: 'input',
@@ -52,17 +53,13 @@ const questions = [
 
    
   ];
-  
-// Function to write README file using the user input
-function writeToFile(fileName, data) {
+  function writeToFile(fileName, data) {
     return fs.writeFileSync(path.join(process.cwd(), fileName), data);
-  }
-  
-  // Function to initialize app
+  };
+
   function init() {
     inquirer.prompt(questions).then((inquirerResponses) => {
-      console.log('Generating README...');
-      writeToFile('README.md', generateMarkdown({ ...inquirerResponses }));
+      writeToFile('READMEexample.md', generateMarkdown({ ...inquirerResponses }));
     });
   }
   
